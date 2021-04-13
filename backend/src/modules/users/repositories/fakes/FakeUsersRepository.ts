@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 
 import User from "../../infra/typeorm/entities/User";
 import IUsersRepository from "@modules/users/repositories/IUsersRepository";
