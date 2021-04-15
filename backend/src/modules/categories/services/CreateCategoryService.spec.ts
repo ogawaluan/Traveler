@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import FakeCategoriesRepository from '../repositories/fakes/FakeCategoriesRepository';
 import CreateCategoryService from './CreateCategoryService';
+import AppError from '@shared/errors/AppError';
 
 let fakeCategoriesRepository: FakeCategoriesRepository;
 let createCategory: CreateCategoryService;
@@ -27,6 +28,6 @@ describe('CreateCategoryService', () => {
     
     await expect(createCategory.execute({
       name: 'Foo',
-    })).rejects.toBeInstanceOf(Error);
+    })).rejects.toBeInstanceOf(AppError);
   });
 });

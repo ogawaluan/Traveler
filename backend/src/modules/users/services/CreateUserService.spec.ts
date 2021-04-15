@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserService from '../services/CreateUserService';
+import AppError from '@shared/errors/AppError';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
@@ -37,6 +38,6 @@ describe('CreateUserService', () => {
       name: 'Foo',
       email: 'Foo2@Foo.com',
       password: 'FooFoo',
-    })).rejects.toBeInstanceOf(Error);
+    })).rejects.toBeInstanceOf(AppError);
   });
 });

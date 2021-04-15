@@ -2,6 +2,7 @@ import { injectable, inject } from "tsyringe";
 
 import Category from "../infra/typeorm/entities/Category";
 import ICategoriesRepository from "../repositories/ICategoriesRepository";
+import AppError from "@shared/errors/AppError";
 
 interface IRequest {
   name: string;
@@ -18,7 +19,7 @@ class CreateCategoryService {
     const checkCategoryExist = await this.categoriesRepository.findByName(name);
 
     if (checkCategoryExist) {
-      throw new Error('Category already exist.');
+      throw new AppError('Category already exist.');
     }
 
     const category = await this.categoriesRepository.create({

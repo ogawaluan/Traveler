@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import FakeUserRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import CreateSessionService from '../services/CreateSessionService';
+import AppError from '@shared/errors/AppError';
 
 
 let fakeUserRespository: FakeUserRepository;
@@ -39,7 +40,7 @@ describe('SessionService', () => {
     await expect(createSession.execute({
       email: 'foo2@foo.com',
       password: '123456',
-    })).rejects.toBeInstanceOf(Error);
+    })).rejects.toBeInstanceOf(AppError);
   });
 
   it('should not be able to create a session with a wrong password', async () => {
@@ -52,6 +53,6 @@ describe('SessionService', () => {
     await expect(createSession.execute({
       email: 'foo2@foo.com',
       password: '123456',
-    })).rejects.toBeInstanceOf(Error);
+    })).rejects.toBeInstanceOf(AppError);
   });
 });
