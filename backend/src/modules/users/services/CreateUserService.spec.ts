@@ -10,14 +10,16 @@ let fakeHashProvider: FakeHashProvider;
 let createUser: CreateUserService;
 
 describe('CreateUserService', () => {
-  it('should be able to create a new user', async () => {
+  beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeHashProvider = new FakeHashProvider();
     createUser = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider
     );
+  });
 
+  it('should be able to create a new user', async () => {
     const user = await createUser.execute({
       name: 'Foo',
       email: 'Foo@Foo.com',
