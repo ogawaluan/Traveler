@@ -11,6 +11,12 @@ class CategoriesRepository implements ICategoriesRepository {
     this.ormRepository = getRepository(Category);
   }
 
+  public async findById(id: string): Promise<Category | undefined> {
+    const category = await this.ormRepository.findOne(id);
+
+    return category;
+  }
+
   public async findByName(name: string): Promise<Category | undefined> {
     const category = await this.ormRepository.findOne({
       where: { name },
@@ -22,7 +28,7 @@ class CategoriesRepository implements ICategoriesRepository {
   public async findAllCategories(): Promise<Category[] | undefined> {
     const categories = await this.ormRepository.find();
 
-    return categories || undefined;
+    return categories;
   }
 
   public async create({ name }: ICreateCategoryDTO): Promise<Category> {
@@ -33,6 +39,10 @@ class CategoriesRepository implements ICategoriesRepository {
     await this.ormRepository.save(category);
 
     return category;
+  }
+
+  public async save(category: Category): Promise<Category> {
+    return this.ormRepository.save(category);
   }
 }
 
