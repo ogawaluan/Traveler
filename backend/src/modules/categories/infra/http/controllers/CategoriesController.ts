@@ -3,6 +3,7 @@ import { container } from "tsyringe";
 
 import CreateCategoryService from "@modules/categories/services/CreateCategoryService";
 import UpdateCategoryService from "@modules/categories/services/UpdateCategoryService";
+import ListAllCategoriesService from "@modules/categories/services/ListAllCategoriesService";
 
 class CategoriesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -15,6 +16,14 @@ class CategoriesController {
     });
 
     return response.json(category);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const showCategories = container.resolve(ListAllCategoriesService);
+
+    const categories = await showCategories.execute();
+
+    return response.json(categories);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
