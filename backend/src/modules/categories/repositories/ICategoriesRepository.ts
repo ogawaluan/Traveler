@@ -7,4 +7,5 @@ export default interface ICategoriesRepository {
   findByName(name: string): Promise<Category | undefined>
   findAllCategories(): Promise<Category[] | undefined>;
   save(category: Category): Promise<Category>;
+  delete(id: string): Promise<any>;
 }
