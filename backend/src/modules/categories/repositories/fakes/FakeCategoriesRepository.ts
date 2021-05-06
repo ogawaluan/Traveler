@@ -40,6 +40,12 @@ class FakeCategoriesRepository implements ICategoriesRepository {
 
     return category;
   }
+
+  public async delete(id: string): Promise<any> {
+    const findIndex = this.categories.findIndex(findCategory => findCategory.id === id);
+
+    return this.categories.splice(findIndex, 1);
+  }
 }
 
 export default FakeCategoriesRepository;
