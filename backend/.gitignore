@@ -1,4 +1,6 @@
 node_modules
 ormconfig.json
 .env
-coverage
+/coverage
+tmp/*
+!tmp/.gitkeep

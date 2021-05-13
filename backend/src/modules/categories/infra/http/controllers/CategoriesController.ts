@@ -9,6 +9,7 @@ import DeleteCategoryService from "@modules/categories/services/DeleteCategorySe
 class CategoriesController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name } = request.body;
+    console.log(request.body);
 
     const createCategory = container.resolve(CreateCategoryService);
 
@@ -19,7 +20,7 @@ class CategoriesController {
     return response.json(category);
   }
 
-  public async show(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const showCategories = container.resolve(ListAllCategoriesService);
 
     const categories = await showCategories.execute();
