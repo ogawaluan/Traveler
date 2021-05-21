@@ -3,6 +3,7 @@ import { container } from "tsyringe";
 
 import CreateCityService from "@modules/cities/services/CreateCityService";
 import UpdateCityService from "@modules/cities/services/UpdateCityService";
+import ListAllCitiesService from "@modules/cities/services/ListAllCitiesService";
 
 class CitiesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -32,6 +33,14 @@ class CitiesController {
     });
 
     return response.json(city);
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listAllCities = container.resolve(ListAllCitiesService);
+
+    const cities = await listAllCities.execute();
+
+    return response.json(cities);
   }
 }
 

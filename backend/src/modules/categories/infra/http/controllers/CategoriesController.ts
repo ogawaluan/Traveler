@@ -19,6 +19,19 @@ class CategoriesController {
 
     return response.json(category);
   }
+  
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { category_id, name } = request.body;
+    
+    const updateCategory = container.resolve(UpdateCategoryService);
+    
+    const category = await updateCategory.execute({
+      category_id,
+      name,
+    });
+    
+    return response.json(category);
+  }
 
   public async index(request: Request, response: Response): Promise<Response> {
     const showCategories = container.resolve(ListAllCategoriesService);
@@ -26,19 +39,6 @@ class CategoriesController {
     const categories = await showCategories.execute();
 
     return response.json(categories);
-  }
-
-  public async update(request: Request, response: Response): Promise<Response> {
-    const { category_id, name } = request.body;
-
-    const updateCategory = container.resolve(UpdateCategoryService);
-
-    const category = await updateCategory.execute({
-      category_id,
-      name,
-    });
-
-    return response.json(category);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
