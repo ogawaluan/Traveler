@@ -4,6 +4,7 @@ import { container } from "tsyringe";
 import CreateCityService from "@modules/cities/services/CreateCityService";
 import UpdateCityService from "@modules/cities/services/UpdateCityService";
 import ListAllCitiesService from "@modules/cities/services/ListAllCitiesService";
+import DeleteCityService from "@modules/cities/services/DeleteCityService";
 
 class CitiesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -41,6 +42,18 @@ class CitiesController {
     const cities = await listAllCities.execute();
 
     return response.json(cities);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { city_id } = request.params;
+    
+    const deleteCityService = container.resolve(DeleteCityService);
+
+    const deletedCity = await deleteCityService.execute({
+      city_id
+    });
+
+    return response.json(deletedCity);
   }
 }
 

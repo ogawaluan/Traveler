@@ -11,5 +11,6 @@ const upload = multer(uploadConfig);
 citiesRouter.post('/', upload.single('image'), citiesController.create);
 citiesRouter.put('/', upload.single('image'), citiesController.update);
 citiesRouter.get('/', citiesController.index);
+citiesRouter.delete('/:city_id', citiesController.delete);
 
 export default citiesRouter;

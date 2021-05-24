@@ -42,15 +42,15 @@ class CategoriesController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const { category_id } = request.body;
+    const { category_id } = request.params;
 
-    const deleteCategory = container.resolve(DeleteCategoryService);
+    const deleteCategoryService = container.resolve(DeleteCategoryService);
 
-    await deleteCategory.execute({
+    const deletedCategory = await deleteCategoryService.execute({
       category_id,
     });
 
-    return response.json({ message: "category deleted" });
+    return response.json(deletedCategory);
   }
 }
 

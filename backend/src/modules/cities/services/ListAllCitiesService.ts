@@ -17,6 +17,10 @@ class ListAllCitiesService {
       throw new AppError('Cities not found');
     }
 
+    if (cities.length === 0) {
+      throw new AppError('You have no registered cities');
+    }
+
     return cities;
   }
 }
